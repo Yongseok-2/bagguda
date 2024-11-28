@@ -1,42 +1,24 @@
-document.getElementById("update-name-button").addEventListener("click", function () {
-    // 새로운 장터명 입력 받기
-    let newMarketName = prompt("새로운 장터명을 입력하세요:");
+var tabBtn = $("#tab-btn > ul > li");     // 각각의 버튼을 변수에 저장
+var tabCont = $("#tab-cont > div");       // 각각의 콘텐츠를 변수에 저장
 
-    if (newMarketName && newMarketName.trim() !== "") {
-        // 8글자 제한: 8글자 이상이면 변경하지 않음
-        if (newMarketName.length > 8) {
-            alert("장터명은 8글자까지만 입력 가능합니다.");
-        } else {
-            // 장터명 텍스트만 변경 (버튼은 유지)
-            document.getElementById("market-name-img").innerText = newMarketName;
-            const marketNameTextElement = document.getElementById("market-name-text");
-        
-            // 기존 버튼 유지하며 텍스트만 업데이트
-            marketNameTextElement.firstChild.nodeValue = newMarketName; 
-        }
-    } else {
-        alert("유효한 장터명을 입력해주세요.");
-    }
-});
+// 컨텐츠 내용을 숨기고, 첫 번째 콘텐츠만 표시
+tabCont.hide().eq(0).css("display", "flex");
 
+tabBtn.click(function () {
+  var target = $(this);         // 클릭된 버튼을 변수에 저장
+  var index = target.index();   // 클릭된 버튼의 인덱스를 변수에 저장
+  
+  // 버튼 활성화 상태 변경
+  tabBtn.removeClass("active");
+  target.addClass("active");
 
+  // 모든 콘텐츠 숨기기
+  tabCont.hide();
 
-document.getElementById("edit-description-button").addEventListener("click", function () {
-    const descriptionText = document.getElementById("market-description");
-    const descriptionEditor = document.getElementById("description-editor");
-    const editButton = document.getElementById("edit-description-button");
-
-    if (descriptionText.style.display !== "none") {
-        // "수정" 버튼을 눌렀을 때: 텍스트 -> 입력창
-        descriptionEditor.value = descriptionText.textContent; // 현재 텍스트를 에디터로 복사
-        descriptionText.style.display = "none"; // 텍스트 숨김
-        descriptionEditor.style.display = "block"; // 에디터 표시
-        editButton.textContent = "저장"; // 버튼 텍스트 변경
-    } else {
-        // "저장" 버튼을 눌렀을 때: 입력창 -> 텍스트
-        descriptionText.textContent = descriptionEditor.value; // 에디터 내용을 텍스트로 복사
-        descriptionEditor.style.display = "none"; // 에디터 숨김
-        descriptionText.style.display = "block"; // 텍스트 표시
-        editButton.textContent = "소개글 수정"; // 버튼 텍스트 변경
-    }
+  // 선택된 콘텐츠를 flex로 표시
+  tabCont.eq(index).css({
+    display: "flex",          // 가로 정렬
+    "flex-wrap": "wrap",      // 줄 바꿈 허용
+    gap: "30px",              // 아이템 간 간격 설정 (선택 사항)
+  });
 });
