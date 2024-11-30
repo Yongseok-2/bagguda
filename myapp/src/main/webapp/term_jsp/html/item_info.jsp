@@ -132,22 +132,39 @@
 			                    <a href="#" class="brand-link">삼성</a> 
 			                    <div class="item-name"><%=pdName %></div>
 			                </div>
-			                <div class="info-middle">
-			                    <div class="trade-info">
-			                        <div class="trade-icon"><img src="../images/trade-icon.svg"></div>
-			                        <div class="trade-details">
-			                            <a href="category_result.jsp?category=<%= java.net.URLEncoder.encode(category, "UTF-8") %>
-			                            	" class="category-link"><%= category %></a>
+						<div class="info-middle">
+						    <div class="trade-info">
+						        <div class="trade-method-info" style="display: flex; flex-wrap: wrap;">
+						            <% 
+						            boolean hasSell = tradeMethod != null && tradeMethod.contains("sell");
+						            boolean hasExchange = tradeMethod != null && tradeMethod.contains("exchange");
+						
+						            // 거래 방식에 맞는 아이콘 추가
+						            if (hasSell) { 
+						            %>
+						                <div class="trade-icon">
+						                    <img src="../images/sell-icon.svg" alt="판매 아이콘">
+						                </div>
+						            <% } 
+						
+						            if (hasExchange) { 
+						            %>
+						                <div class="trade-icon">
+						                    <img src="../images/trade-icon.svg" alt="교환 아이콘">
+						                </div>
+						            <% } 
+						            %>
+						        </div>
+						        <div class="trade-details">
+						            <a href="category_result.jsp?category=<%= java.net.URLEncoder.encode(category, "UTF-8") %>" class="category-link"><%= category %></a>
+						            <div class="trade-price"><%= pdPrice %> 원</div>
+						        </div>
+						    </div>
+						</div>
 
 
-			                            <div class="trade-price"><%=pdPrice %> 원</div>
-			                        </div>
-			                    </div>
-			                    <div class="sell-info">
-			                        <div class="trade-icon"><img src="../images/sell-icon.svg"></div>
-			                        <div class="product-price"><%=pdPrice %> 원</div>
-			                    </div>
-			                </div>
+
+
 			                <div class="info-bottom">
 			                    <div class="heart-count-icon"><img src="../images/fill-heart.svg"></div>
 			                    <div class="heart-count">2</div>
@@ -201,49 +218,68 @@
 			            </div>
 			        </div>
 					<div class="simmilar">
-					    <div class="silmmiliar-title"><h2>비슷한 물품 추천</h2></div>
-					    <div class="lastest-item">
-					        <%
-					            if (productId != null && category != null) {
-					                PreparedStatement similarPstmt = null;
-					                ResultSet similarRs = null;
-					                try {
-					                    String similarQuery = "SELECT pd_name, pd_price, pd_image, product_id, trade_method FROM products " +
-					                                          "WHERE category = ? AND product_id != ? ORDER BY RAND() LIMIT 8";
-					                    similarPstmt = conn.prepareStatement(similarQuery);
-					                    similarPstmt.setString(1, category);
-					                    similarPstmt.setInt(2, Integer.parseInt(productId));
-					                    similarRs = similarPstmt.executeQuery();
-					
-					                    while (similarRs.next()) {
-					                        String similarName = similarRs.getString("pd_name");
-					                        int similarPrice = similarRs.getInt("pd_price");
-					                        String similarImage = similarRs.getString("pd_image");
-					                        int similarId = similarRs.getInt("product_id");
-					        %>
-					                        <div class="product-container">
-					                        	<div class="want-item">
-						                            <a href="item_info.jsp?product_id=<%= similarId %>">
-						                                <img src="<%= "../" + similarImage %>" alt="<%= similarName %>" class="pd-image">
-						                                <div class="item-details">
-						                                    <div class="pd-name"><%= similarName %></div>
-						                                    <div class="pd-price"><%= similarPrice %> 원</div>
-						                                </div>
-						                            </a>
-						                        </div>
-					                        </div>
-					        <%
-					                    }
-					                } catch (Exception e) {
-					                    out.println("<p>비슷한 물품을 가져오는 중 오류 발생: " + e.getMessage() + "</p>");
-					                } finally {
-					                    try { if (similarRs != null) similarRs.close(); } catch (SQLException ignored) {}
-					                    try { if (similarPstmt != null) similarPstmt.close(); } catch (SQLException ignored) {}
-					                }
-					            }
-					        %>
-					    </div>
-					</div>
+    <div class="silmmiliar-title"><h2>비슷한 물품 추천</h2></div>
+    <div class="lastest-item">
+        <%
+            if (productId != null && category != null) {
+                PreparedStatement similarPstmt = null;
+                ResultSet similarRs = null;
+                try {
+                    String similarQuery = "SELECT pd_name, pd_price, pd_image, product_id, trade_method FROM products " +
+                                          "WHERE category = ? AND product_id != ? ORDER BY RAND() LIMIT 8";
+                    similarPstmt = conn.prepareStatement(similarQuery);
+                    similarPstmt.setString(1, category);
+                    similarPstmt.setInt(2, Integer.parseInt(productId));
+                    similarRs = similarPstmt.executeQuery();
+
+                    while (similarRs.next()) {
+                        String similarName = similarRs.getString("pd_name");
+                        int similarPrice = similarRs.getInt("pd_price");
+                        String similarImage = similarRs.getString("pd_image");
+                        int similarId = similarRs.getInt("product_id");
+          
+
+                        String tradeIcons = ""; // 거래 아이콘 저장할 변수
+
+                        if (tradeMethod != null) {
+                            String[] methods = tradeMethod.split(","); // 거래 방식을 ','로 구분하여 배열로 분리
+                            
+                            // 각 거래 방식에 따라 아이콘을 추가
+                            for (String method : methods) {
+                                if ("exchange".equalsIgnoreCase(method.trim())) {
+                                    tradeIcons += "<img src='../images/trade-icon.svg' alt='물물교환 아이콘' class='trade-icon'>";
+                                } else if ("sell".equalsIgnoreCase(method.trim())) {
+                                    tradeIcons += "<img src='../images/sell-icon.svg' alt='판매 아이콘' class='trade-icon'>";
+                                }
+                            }
+                        }
+        %>
+                        <div class="product-container">
+                            <div class="want-item">
+                                <a href="item_info.jsp?product_id=<%= similarId %>">
+                                    <img src="<%= "../" + similarImage %>" alt="<%= similarName %>" class="pd-image">
+                                    <div class="item-details">
+                                        <div class="pd-name"><%= similarName %></div>
+                                        <div class="pd-price"><%= similarPrice %> 원<%= tradeIcons %>
+                                        </div>
+                                    </div>
+                                </a>
+                                <!-- 거래 방식 아이콘 추가 -->
+
+                            </div>
+                        </div>
+        <%
+                    }
+                } catch (Exception e) {
+                    out.println("<p>비슷한 물품을 가져오는 중 오류 발생: " + e.getMessage() + "</p>");
+                } finally {
+                    try { if (similarRs != null) similarRs.close(); } catch (SQLException ignored) {}
+                    try { if (similarPstmt != null) similarPstmt.close(); } catch (SQLException ignored) {}
+                }
+            }
+        %>
+    </div>
+</div>
 
 
 

@@ -98,28 +98,37 @@
 			            			    "ORDER BY product_id DESC " + // product_id를 기준으로 내림차순 정렬
 			            			    "LIMIT 12" // 최대 12개 행만 반환
 			            			)) {
-			                while (rs.next()) {
-			                    String tradeMethod = rs.getString("trade_method"); // trade_method 값을 가져옴
-			                    String tradeIcon = "";
-			                    if ("exchange".equalsIgnoreCase(tradeMethod)) {
-			                        tradeIcon = "images/trade-icon.svg"; // 교환 아이콘 경로
-			                    } else if ("sell".equalsIgnoreCase(tradeMethod)) {
-			                        tradeIcon = "images/sell-icon.svg"; // 판매 아이콘 경로
-			                    }
+			            	 while (rs.next()) {
+			                     String tradeMethod = rs.getString("trade_method"); // trade_method 값을 가져옴
+			                     String tradeIcons = "";
+
+			                     // trade_method가 ','로 구분된 값을 포함할 수 있기 때문에 이를 처리
+			                     if (tradeMethod != null) {
+			                         String[] methods = tradeMethod.split(","); // 콤마로 구분된 값을 배열로 분리
+
+			                         // 'exchange'와 'sell' 값을 확인해서 각각 아이콘을 지정
+			                         for (String method : methods) {
+			                             if ("exchange".equalsIgnoreCase(method.trim())) {
+			                                 tradeIcons += "<img src='images/trade-icon.svg' alt='물물교환 아이콘' class='trade-icon'>"; // 교환 아이콘
+			                             } else if ("sell".equalsIgnoreCase(method.trim())) {
+			                                 tradeIcons += "<img src='images/sell-icon.svg' alt='판매 아이콘' class='trade-icon'>"; // 판매 아이콘
+			                             }
+			                         }
+			                     }
 			    %>
 			                    <!-- 상품 개별 컨테이너 -->
 			                    <div class="product-container">
-			                        <div class="want-item">
-			                        	<a href="html/item_info.jsp?product_id=<%= rs.getString("product_id") %>">
-			                            <img src="<%= rs.getString("pd_image") %>" alt="상품 이미지" class="pd-image">
-			                            <h5 class="pd-name"><%= rs.getString("pd_name") %></h5>
-			                            <p class="pd-price">
-			                                <%= rs.getInt("pd_price") %>
-			                                <img src="<%= tradeIcon %>" alt="<%= tradeMethod %>" class="trade-icon">
-			                            </p>
-			                            </a>
-			                        </div>
-			                    </div>
+				                    <div class="want-item">
+				                        <a href="html/item_info.jsp?product_id=<%= rs.getString("product_id") %>">
+				                            <img src="<%= rs.getString("pd_image") %>" alt="상품 이미지" class="pd-image">
+				                            <h5 class="pd-name"><%= rs.getString("pd_name") %></h5>
+				                            <p class="pd-price">
+				                                <%= rs.getInt("pd_price") %> 원
+				                                <%= tradeIcons %> <!-- 동적으로 아이콘을 출력 -->
+				                            </p>
+				                        </a>
+				                    </div>
+				                </div>
 			    <%
 			                }
 			            } catch (SQLException e) {

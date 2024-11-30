@@ -113,7 +113,7 @@
             <!-- 카테고리 및 상태 선택 -->
             <div class="item-cartegory-container">
                 <span id="image-count">카테고리</span>
-                <select class="item-cartegory" name="category">
+                <select class="item-cartegory" name="category[]">
                     <option value="" disabled selected>선택</option>
                     <option value="노트북">노트북</option>
                     <option value="지이잉">지이잉</option>
@@ -126,20 +126,20 @@
                 <span id="image-count">거래방식</span>
                 <div class="trade-title-container">
                     <div class="trade-system">
-                        <div class="trade-system-checkbox">
-                            <div class="meet">
-                                <input type="checkbox" id="meet-checkbox" name="trade_meet">직거래
-                            </div>
-                            <div class="post">
-                                <input type="checkbox" id="post-checkbox" name="trade_post">택배
-                            </div>
-                        </div>
-                    </div>
+					    <div class="trade-system-checkbox">
+					        <div class="meet">
+					            <input type="checkbox" id="meet-checkbox" name="trade_system[]" value="meet"> 직거래
+					        </div>
+					        <div class="post">
+					            <input type="checkbox" id="post-checkbox" name="trade_system[]" value="post"> 택배
+					        </div>
+					    </div>
+					</div>
 				<div class="trade-method">
 				    <div class="exchange">
 				        <div class="trade-box">
 				            <label id="trade-icon">
-				                <input type="checkbox" id="trade-checkbox" name="trade_exchange"> 
+				                <input type="checkbox" id="trade-checkbox" name="trade_method[]" value="exchange"> 
 				                <img src="../images/trade-icon.svg" alt="물물교환 아이콘" id="trade-icon">
 				                물물교환
 				            </label>
@@ -155,7 +155,7 @@
 				    <div class="sell">
 				        <div class="sell-box">
 				            <label id="sell-icon">
-				                <input type="checkbox" id="sell-checkbox" name="trade_sell">
+				                <input type="checkbox" id="sell-checkbox" name="trade_method[]" value="sell">
 				                <img src="../images/sell-icon.svg" alt="판매 아이콘" id="sell-icon">
 				                판매
 				            </label>

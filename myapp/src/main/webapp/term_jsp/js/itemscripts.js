@@ -3,6 +3,7 @@ const customUploadBox = document.getElementById("custom-upload-box");
 const photoPreview = document.getElementById("photo-preview");
 const imageCountText = document.getElementById("image-count");
 
+
 // 이미지 등록 버튼 클릭 시 파일 선택창 열기
 customUploadBox.addEventListener("click", () => {
     photoInput.click();
@@ -59,3 +60,8 @@ sellCheckbox.addEventListener('change', () => {
         sellInput.classList.add('hidden');  // 체크 해제되면 숨기기
     }
 });
+
+
+
+
+

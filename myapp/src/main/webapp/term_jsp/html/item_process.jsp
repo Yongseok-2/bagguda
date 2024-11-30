@@ -33,7 +33,7 @@
     }
 
     // 파일 업로드 처리
-    String uploadPath = "D:\\term\\myapp\\src\\main\\webapp\\term_jsp\\upload"; // 파일 저장 경로
+    String uploadPath = "C:\\Users\\Beomryeol\\git\\bagguda\\myapp\\src\\main\\webapp\\term_jsp\\upload"; // 파일 저장 경로
     int maxSize = 5 * 1024 * 1024; // 5MB 제한
     String encoding = "UTF-8";
 
@@ -58,26 +58,20 @@
         String pd_name = multi.getParameter("pd_name");
         int pd_price = Integer.parseInt(multi.getParameter("pd_price"));
         String pd_information = multi.getParameter("pd_information");
-        String category = multi.getParameter("category");
+        String[] categories = multi.getParameterValues("category[]");
         String pd_status = multi.getParameter("pd_status");
-        String trade_method = multi.getParameter("trade_method");  // 거래방식 (exchange, sell)
-        String trade_system = multi.getParameter("trade_system");
+        String[] trade_methods = multi.getParameterValues("trade_method[]");
+        String[] trade_systems = multi.getParameterValues("trade_system[]");
         String location_1 = multi.getParameter("location_1"); // 거래 희망 지역 1
         String location_2 = multi.getParameter("location_2"); // 거래 희망 지역 2
-
+        String[] locations = multi.getParameterValues("location_1[]");
         // 체크박스 상태 확인
-        if (multi.getParameter("trade_exchange") != null) {
-            trade_method = "exchange"; // 물물교환
-        } else if (multi.getParameter("trade_sell") != null) {
-            trade_method = "sell"; // 판매
-        }
-
-        if (multi.getParameter("trade_meet") != null) {
-            trade_system = "meet"; // 물물교환
-        } else if (multi.getParameter("trade_post") != null) {
-            trade_system = "post"; // 판매
-        }
-
+        
+        String trade_method = (trade_methods != null) ? String.join(",", trade_methods) : "";
+        String trade_system = (trade_systems != null) ? String.join(",", trade_systems) : "";
+        String category = (categories != null) ? String.join(",", categories) : "";
+		String location = (locations != null) ? String.join(",", locations) : "";
+		
         // 물물교환 가격 처리
         String trade_price = multi.getParameter("trade_price");
         String trade_max_price = multi.getParameter("trade_max_price");
@@ -93,19 +87,19 @@
             conn = DBConnection.getConnection();
             if (conn != null) {
                 // SQL 작성 및 실행
-                String sql = "INSERT INTO products (pd_name, pd_price, pd_image, pd_information, owner, pd_status, category, trade_method, trade_system, location_1, location_2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-                stmt = conn.prepareStatement(sql);
-                stmt.setString(1, pd_name);
-                stmt.setInt(2, pd_price);
-                stmt.setString(3, String.join(",", pd_images)); // 여러 이미지 경로를 콤마로 구분하여 저장
-                stmt.setString(4, pd_information);
-                stmt.setString(5, owner);  // 로그인된 사용자 아이디를 owner로 설정
-                stmt.setString(6, pd_status);
-                stmt.setString(7, category);
-                stmt.setString(8, trade_method);  // 거래 방식 (exchange, sell)
-                stmt.setString(9, trade_system);  // 거래 방식 (exchange, sell)
-                stmt.setString(10, location_1);
-                stmt.setString(11, location_2);
+                 String sql = "INSERT INTO products (pd_name, pd_price, pd_image, pd_information, owner, pd_status, category, trade_method, trade_system, location_1, location_2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                 stmt = conn.prepareStatement(sql);
+                 stmt.setString(1, pd_name);
+                 stmt.setInt(2, pd_price);
+                 stmt.setString(3, String.join(",", pd_images));
+                 stmt.setString(4, pd_information);
+                 stmt.setString(5, owner);
+                 stmt.setString(6, pd_status);
+                 stmt.setString(7, category);  // 다중 선택값 저장
+                 stmt.setString(8, trade_method);  // 다중 선택값 저장
+                 stmt.setString(9, trade_system);
+                 stmt.setString(10, location_1);  // 다중 선택값 저장
+                 stmt.setString(11, location_2);
 
                 int rowsAffected = stmt.executeUpdate();
                 if (rowsAffected > 0) {
