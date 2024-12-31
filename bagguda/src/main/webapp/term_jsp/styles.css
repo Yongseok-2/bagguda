@@ -1,0 +1,432 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    display: flex;
+    min-width: auto;
+    min-height: auto;
+    font-family: Arial, sans-serif;
+    justify-content: center; /* 수평 중앙 정렬 */
+    margin: 0; /* 기본 여백 제거 */
+}
+
+a {
+    text-decoration-line: none;    
+}
+
+/*사이드바*/
+.container {
+    width: 120px;
+    height: 50px;
+    position: fixed;
+    top: 785px;
+    left: 90%;
+    text-align: center; /* 중앙 정렬 */
+    background-color: #ffffff; 
+    border: #a6a6a6 2px solid; 
+    border-radius: 10px;
+    padding: 3px;
+}
+
+.heart-container {
+    display: flex; /* 하트와 개수를 가로로 배치 */
+    align-items: center; /* 수직 중앙 정렬 */
+    margin-bottom: 5px; /* 하트와 줄 간격 조정 */
+    width: 120px;
+    height: 50px;
+    position: fixed;
+    top: 840px;
+    left: 90%;
+    text-align: center; /* 중앙 정렬 */
+    background-color: #ffffff; 
+    border:  #a6a6a6 2px solid; 
+    padding: 10px; /* 내부 여백 추가 */
+    border-radius: 10px;
+}
+
+.heart-container span {
+    color: #a6a6a6;
+}
+
+.heart-container img {
+    width: 30px;
+    height: auto;
+    padding-top: 3px;
+    margin-right: 5px;
+    margin-left: 23px;
+}
+
+.heart-count {
+    font-size: 20px; 
+    color: black;
+    padding-bottom: 1px;
+}
+
+
+.divider {
+    border: none; /* 기본 테두리 제거 */
+    height: 2px; /* 줄 두께 */
+    background-color: #0880F8; /* 줄 색상 */
+    margin: 10px 0; /* 줄과 텍스트 간격 조정 */
+}
+
+.recent-viewed {
+    font-size: 12px; /* 글자 크기 조정 */
+    color: black; /* 글자 색상 설정 */
+}
+
+.recent-viewed-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 10px;
+    font-size: 14px;
+    color: black;
+}
+
+.recent-item {
+    background-color: #f0f0f0;
+    padding: 8px;
+    margin: 5px 0;
+    border-radius: 4px;
+    text-align: left;
+    display: flex;
+    position: relative; 
+}
+
+.delete-btn {
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    border: rgb(83, 35, 255) 3px solid;
+    cursor: pointer;
+    position: absolute; 
+    right: 5px; 
+    top: 50%; 
+    transform: translateY(-50%); /* 수직 중앙 정렬을 위해 Y축으로 50% 이동 */
+}
+
+/* 마우스 오버 시 스타일 추가 */
+.delete-btn:hover {
+    background-color: #0880F8;
+    color: white;
+}
+
+
+#recentViewedList {
+    list-style-type: none; /* 점 제거 */
+    padding: 0; /* 기본 패딩 제거 */
+}
+
+
+/*상단*/
+.header {
+    width: 1980px;
+    height: 245px; 
+    border-bottom: 1px solid black;
+    border-right: 1px solid #ddd; 
+    border-left: 1px solid #ddd; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: fixed;
+    background-color: white;
+    z-index: 1000;
+    top: 0; /* 화면의 상단 고정 */
+    box-shadow: 0px 5px 6px rgba(134, 134, 134, 0.2); /* 가로, 세로, 흐림, 투명도 */
+}
+
+.top-bar {
+    width: 1980px;
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+.search-bar {
+    min-width: 1280px;
+    height: 100px;
+    display: flex;
+    gap: 145px;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin: 0 auto;
+}
+
+.logo {
+    width: 200px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+
+}
+
+.search-input-container {
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    width: 460px;
+    padding: 8px;
+    font-size: 15px;
+    border-radius: 5px 0 0 5px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+.search-button {
+    width: 40px;
+    height: 39px;
+    border: none;
+    background-color: #0880F8;
+    color: white;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icons {
+    display: flex;
+    gap: 20px;
+    border:none;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.icons:hover {
+    color: #8d8d8d;
+}
+
+*, *:after, *:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+a:hover, a:focus {
+    outline: none;
+  }
+
+  .row {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 2px;
+  }
+  .menu {
+    width: 1280px;
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+  }
+
+  .menu a {
+    color: rgba(0, 0, 0, 0.8);
+    font-size: 17pt;
+    font-weight: 600;
+    padding: 14px 25px;
+    /**/
+    position: relative;
+    display: block;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .SMN_effect-6 a {
+    padding: 10px 0;
+    padding-bottom: px;
+  }
+  
+  .SMN_effect-6 a:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    padding: 10px 0;
+    max-width: 0;
+    border-bottom: 3px solid #0880F8;
+    color: #0880F8;
+    content: attr(data-hover);
+    -webkit-transition: max-width 0.5s;
+    -moz-transition: max-width 0.5s;
+    transition: max-width 0.5s;
+    white-space: nowrap
+  }
+  
+  .SMN_effect-6 a:hover:before, .SMN_effect-6 a:focus:before {
+    max-width: 100%;
+  }
+
+  a.button {
+    display: block;
+    position: relative;
+    float: left;
+    width: 120px;
+    height: 47px;
+    padding: 0;
+    font-weight: 600;
+    text-align: center;
+    line-height: 50px;
+    color: #FFF;
+    border-radius: 5px;
+    transition: all 0.2s ;
+    font-size: 20px;
+    margin-bottom: 5px;
+    color: white;
+  }
+  
+  .btnLightBlue {
+    background: #0880F8;
+  }
+
+  .btnFade.btnLightBlue:hover {
+    background: #075fb7;
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 반투명 검정색 */
+    z-index: 999; /* 사이드바보다 뒤에 배치 */
+    opacity: 0; /* 초기 상태: 투명 */
+    visibility: hidden; /* 초기 상태: 안 보이도록 설정 */
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.overlay.visible {
+    opacity: 1; /* 보이는 상태 */
+    visibility: visible; /* 표시 */
+}
+
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -550px; /* 초기 상태: 화면 밖 */
+    width: 550px;
+    height: 100%;
+    background-color: #f5f5f5;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+    transition: left 0.5s ease;
+    z-index: 1000;
+}
+
+.sidebar h2 {
+    padding-left: 25px;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.sidebar ul {
+    width: 250px;
+    list-style: none;
+    padding: 20px;
+    margin: 0;
+}
+
+.sidebar ul li {
+    margin: 10px 0;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.sidebar ul li a:hover {
+    background-color: #0880F8;
+    color: #fff;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.sidebar.open {
+    left: 0; /* 화면 안으로 이동 */
+}
+
+/* 드롭다운 메뉴 기본 숨김 */
+.dropdown-menu {
+    display: none; /* 기본적으로 보이지 않음 */
+    position: absolute;
+    left: 100%; /* 오른쪽으로 위치 */
+    top: 0;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    padding: 10px;
+    list-style: none;
+    z-index: 1001;
+    max-width: 250px;
+}
+
+
+.dropdown-menu li {
+    margin: 5px 0;
+}
+
+.dropdown-menu li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+}
+
+/* 드롭다운 표시 */
+.dropdown:hover > .dropdown-menu {
+    display: block; /* 마우스를 올렸을 때 보이기 */
+}
+
+/* 드롭다운 부모 스타일 */
+.dropdown {
+    position: relative; /* 드롭다운 자식의 위치 기준 */
+    list-style: none;
+}
+
+.dropdown > a {
+    text-decoration: none;
+    display: inline-block;
+    padding: 10px;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+}
+
+.icons span{
+    text-decoration: none; /* 밑줄 제거 */
+    color:black;
+}
+

@@ -1,0 +1,150 @@
+/* 배너 전체를 감싸는 컨테이너 */
+.banner-container {
+    width: 1980px; /* 페이지 전체 너비 */
+    height: auto;
+    display: flex;
+    justify-content: center; /* 수평 가운데 정렬 */
+    z-index: 9; /* 헤더보다 아래로 */
+    align-items: center;
+    margin-top: 245px;
+    border-bottom: 1px solid #000000;
+    box-shadow: 0px 5px 6px rgba(134, 134, 134, 0.3); /* 가로, 세로, 흐림, 투명도 */
+}
+
+
+.slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    min-width: 100%;
+    box-sizing: border-box;
+}
+
+.slide img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.indicators {
+    position: absolute;
+    top: 710px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background-color: #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dot.active {
+    background-color: #0b0606;
+}
+
+
+.main-item-list {
+    width: 1280px;
+    display: flex;
+    justify-content: center; /* 수평 가운데 정렬 */
+    align-items: center;
+    margin-left: 300px;
+}
+
+.lastest-item-title {
+    width: 1280px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    margin-left: 350px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-top: 20px;
+}
+
+.lastest-item-title h2 {
+    padding-inline-start: 10px;
+}
+
+.lastest-item {
+    width: 1280px;
+    display: flex;
+    flex-wrap: wrap; /* 여러 상품이 가로로 늘어날 수 있도록 설정 */
+    margin-left: 350px;
+    margin-top: 20px; /* 배너 아래 간격 */
+    gap: 30px;
+}
+
+.lastest-item h3 {
+	color:black;
+	text-decoration: none;
+}
+/* 상품 전체 컨테이너 */
+.product-container {
+    width: 204px; /* 너비 설정 */
+    text-align: left; /* 내용 왼쪽 정렬 */
+    background-color: #fff; /* 배경 색 */
+    padding: 0; /* 내부 여백 없애기 */
+    box-shadow: none; /* 그림자 없애기 */
+    margin: 10px; /* 상품 간격 추가 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+/* 상품 이미지 스타일 */
+.pd-image {
+	border: 2px solid #ddd;
+    border-radius: 30px;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.pd-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 상품명 스타일 */
+.pd-name {
+    font-size: 20px;
+    font-weight: bold;
+    padding-inline-start: 5px;
+}
+
+/* 가격 스타일 */
+.pd-price {
+    font-size: 24px;
+    color: #333;
+    font-weight: bold;
+    padding-inline-start: 5px;
+    display: flex;
+    align-items: center
+}
+
+/* 배지 이미지 스타일 */
+.pd-badge {
+    display: inline-block;
+    vertical-align: middle;
+    width: auto;
+    height: auto;
+}
+
+.badge-img {
+    width: 20px;
+    height: auto;
+}
+
+
