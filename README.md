@@ -1,5 +1,6 @@
 # 바꾸다
 ![바꾸다_가로로고](https://github.com/user-attachments/assets/58028526-33ef-410d-b58b-6a2bd9238490)
+
 ---
 
 ## 프로젝트 진행기간
