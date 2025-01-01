@@ -50,10 +50,9 @@
 ---
 
 ## ✅ 활용방안
-![슬라이드21](https://github.com/user-attachments/assets/0e259746-b009-4478-abaf-477f81216691)
-![슬라이드22](https://github.com/user-attachments/assets/2b36dc6b-48b3-4bac-8084-eb736eb35701)
-![슬라이드23](https://github.com/user-attachments/assets/28ba44b1-7233-4d5d-98bc-27b128974937)
-![슬라이드24](https://github.com/user-attachments/assets/97c3c874-5875-4873-a680-eede647f0697)
+|![슬라이드21](https://github.com/user-attachments/assets/0e259746-b009-4478-abaf-477f81216691)|![슬라이드22](https://github.com/user-attachments/assets/2b36dc6b-48b3-4bac-8084-eb736eb35701)|
+|:---:|:---:|
+|![슬라이드23](https://github.com/user-attachments/assets/28ba44b1-7233-4d5d-98bc-27b128974937)|![슬라이드24](https://github.com/user-attachments/assets/97c3c874-5875-4873-a680-eede647f0697)|
 
 ---
 
