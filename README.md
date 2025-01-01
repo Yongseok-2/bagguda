@@ -33,8 +33,8 @@
 ---
 
 ## ✅ 화면 설계
-|:---:|:---:|
 |![슬라이드9](https://github.com/user-attachments/assets/4f0b6338-541d-4c30-9094-64eff29a152e)|![슬라이드10](https://github.com/user-attachments/assets/a6454c16-6952-4f8a-a08a-b04d11f1df6e)|
+|:---:|:---:|
 |![슬라이드11](https://github.com/user-attachments/assets/cb35b1ef-72a5-4f1b-8224-ab7e5e67ef10)|![슬라이드13](https://github.com/user-attachments/assets/4a96bf8f-4ee1-48c6-8e03-06865f24430b)|
 
 ---
